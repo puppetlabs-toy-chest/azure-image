@@ -200,6 +200,10 @@
           },
           "storageAccountResourceGroup": {
             "value": "[parameters('storageAccountResourceGroup')]"
+          },
+          "nicName": {
+            "value":"[parameters('nicName')]",
+            }
           }
         }
       }
@@ -226,6 +230,10 @@
           },
           "publicIPAddressDomainNameLabel": {
             "value": "[parameters('publicIPAddressDomainNameLabel')]"
+          },
+          "nicName": {
+            "value":"[parameters('nicName')]",
+            }
           }
         }
       }
@@ -278,6 +286,10 @@
           },
           "virtualNetworkResourceGroup": {
             "value": "[parameters('virtualNetworkResourceGroup')]"
+          },
+          "nicName": {
+            "value":"[parameters('nicName')]",
+            }
           }
         }
       }
@@ -333,6 +345,10 @@
           },
           "templateBaseUrl":{
             "value" : "[parameters('templateBaseUrl')]"
+          },
+          "nicName": {
+            "value":"[parameters('nicName')]",
+            }
           }
         }
       }
