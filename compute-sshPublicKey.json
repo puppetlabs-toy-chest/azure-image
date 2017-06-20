@@ -46,7 +46,7 @@
     "OSDiskName": "osdisk1",
     "nicName": "puppetmasterNic",
     "vmStorageAccountContainerName": "vhds",
-    "customData": "[touch /tmp/customDataFromSSHPublicKey]"
+    "customData": "['#!/bin/bash\ntouch /tmp/customDataDonesshkey']"
   },
   "resources": [
     {
