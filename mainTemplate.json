@@ -4,6 +4,7 @@
   "parameters": {
     "location": {
       "type":"string",
+      "defaultValue": "northeurope",
       "metadata":{
         "description":"Location of deployment"
       }
@@ -17,6 +18,7 @@
     },
     "vmSize": {
       "type":"string",
+      "defaultValue": "Standard_A2",
       "metadata":{
         "description":"VM Size"
       }
@@ -105,7 +107,7 @@
     },
     "publicIPAddressResourceGroup": {
       "type":"string",
-      "defaultValue":"",
+      "defaultValue":"pubipaddrresgroup01",
       "metadata":{
         "description":"Public IP Address Resource Group"
       }
@@ -152,13 +154,20 @@
         "description":"Storage Acccount New or Existing"
       }
     },
+    "nicName": {
+      "type": "string",
+      "defaultValue":"puppetnic01",
+      "metadata":{
+        "description":"NIC name"
+      }
+    },
     "templateBaseUrl": {
       "type": "string",
       "metadata": {
         "artifactsBaseUrl": "",
         "description": "URL to acquire other templates"
       },
-      "defaultValue": "https://raw.githubusercontent.com/gregohardy/azure-image/master/"
+      "defaultValue": "https://raw.githubusercontent.com/puppetlabs/azure-image/master/"
     }
   },
   "variables": {
