@@ -335,6 +335,9 @@
           "templateBaseUrl":{
             "value" : "[parameters('templateBaseUrl')]"
           },
+          "publicIPAddressName":{
+            "value": "[parameters('publicIPAddressName')]"
+          },
           "nicName": {
             "value": "[parameters('nicName')]"
           }
