@@ -1,0 +1,202 @@
+{
+  "handler": "Microsoft.Compute.MultiVm",
+  "version": "0.0.1-preview",
+  "parameters": {
+    "basics": [
+      {
+        "name": "puppetMasterVmName",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Puppet Enterprise Master VM Name",
+        "defaultValue": "puppetmaster",
+        "constraints": {
+          "required": true,
+          "regex": "^[a-z0-9]{1,25}$",
+          "validationMessage": "Only lowercase letters and numbers are allowed, and the value must be 1-25 characters long."
+        }
+      },
+      {
+        "name": "consolePassword",
+        "type": "Microsoft.Common.PasswordBox",
+        "label": {
+          "password": "Puppet Enterprise Console Password",
+          "confirmPassword": "Confirm console password"
+        },
+        "toolTip": "",
+        "constraints": {
+          "required": true,
+          "regex": "",
+          "validationMessage": ""
+        },
+        "options": {
+          "hideConfirmation": false
+        },
+        "visible": true
+      }
+    ],
+    "steps": [
+      {
+        "name": "settings",
+        "label": "Settings",
+        "subLabel": {
+          "preValidation": "Configure infrastructure settings",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Settings",
+        "elements": [
+          {
+            "name": "Compute",
+            "type": "Microsoft.Common.Section",
+            "label": "Compute",
+            "elements": [
+              {
+                "name": "adminUsername",
+                "type": "Microsoft.Compute.UserNameTextBox",
+                "label": "Username",
+                "toolTip": "Admin username for the Puppet Enterprise master",
+                "osPlatform": "Linux",
+                "constraints": {
+                    "required": true
+                }
+              },
+              {
+                "name": "adminPassword",
+                "type": "Microsoft.Compute.CredentialsCombo",
+                "label": {
+                  "authenticationType": "Authentication type",
+                  "password": "Password",
+                  "confirmPassword": "Confirm password",
+                  "sshPublicKey": "SSH public key"
+                },
+                "toolTip": {
+                  "authenticationType": "",
+                  "password": "",
+                  "sshPublicKey": ""
+                },
+                "constraints": {
+                  "required": true
+                },
+                "options": {
+                  "hideConfirmation": false,
+                  "hidePassword": false
+                },
+                "osPlatform": "Linux",
+                "visible": true
+              },
+              {
+                "name": "vmSize",
+                "type": "Microsoft.Compute.SizeSelector",
+                "label": "Size",
+                "toolTip": "",
+                "recommendedSizes": [
+                  "Standard_D2_v2",
+                  "Standard_D2",
+                  "Standard_DS2",
+                  "Standard_D3_v2",
+                  "Standard_D3",
+                  "Standard_DS3"
+                ],
+                "constraints": {
+                  "allowedSizes": [],
+                  "excludedSizes": [
+                    "Standard_A0",
+                    "Standard_A1",
+                    "Basic_A0",
+                    "Basic_A1",
+                    "Basic_A2",
+                    "Basic_A3",
+                    "Basic_A5"
+                  ]
+                },
+                "osPlatform": "Linux",
+                "imageReference": {
+                  "publisher": "Puppet",
+                  "offer": "Puppet-Enterprise",
+                  "sku": "2015-3-3"
+                },
+                "visible": true
+              }
+            ],
+            "visible": true
+          },
+          {
+            "name": "Network",
+            "type": "Microsoft.Common.Section",
+            "label": "Network",
+            "elements": [
+              {
+                "name": "ipAddress",
+                "type": "Microsoft.Network.PublicIpAddressCombo",
+                "label": {
+                  "publicIpAddress": "Public IP address",
+                  "domainNameLabel": "DNS label"
+                },
+                "toolTip": {
+                  "publicIpAddress":"Public IP address for Puppet Enterprise master",
+                  "domainNameLabel": "DNS label for Puppet Enterprise master"
+                },
+                "defaultValue": {
+                  "publicIpAddressName": "ip01",
+                  "domainNameLabel":"[concat('puppet',substring(guid(),0,4))]"
+                },
+                "options": {
+                  "hideNone": true,
+                  "hideDomainNameLabel": false
+                },
+                "constraints": {
+                  "required": {
+                  "domainNameLabel": true
+                  }
+                }
+              }
+            ],
+            "visible": true
+          },
+          {
+            "name": "Storage",
+            "type": "Microsoft.Common.Section",
+            "label": "Storage",
+            "elements": [
+              {
+                "name": "storageAccount",
+                "type": "Microsoft.Storage.StorageAccountSelector",
+                "label": "Storage account",
+                "toolTip": "Storage account for the Virtual Machine disks",
+                "defaultValue": {
+                  "name": "[concat('str',substring(guid(),0,4))]",
+                  "type": "Standard_LRS"
+                },
+                "constraints": {
+                  "allowedTypes": [],
+                  "excludedTypes": []
+                },
+                "options": {
+                  "hideExisting": false
+                },
+                "visible": true
+              }
+            ],
+            "visible": true
+          }
+        ]
+      }
+    ],
+    "outputs": {
+      "location": "[location()]",
+      "puppetMasterVmName": "[steps('basicsStep').puppetMasterVmName]",
+      "consolePassword": "[steps('basicsStep').consolePassword]",
+      "vmSize" : "[steps('settings').Compute.vmSize]",
+      "adminUsername": "[steps('settings').Compute.adminUsername]",
+      "adminPassword": "[steps('settings').Compute.adminPassword.password]",
+      "sshPublicKey" : "[steps('settings').Compute.adminPassword.sshPublicKey]",
+      "authenticationType":"[steps('settings').Compute.adminPassword.authenticationType]",
+      "publicIPAddressName" : "[steps('settings').Network.ipAddress.name]",
+      "publicIPAddressResourceGroup" : "[steps('settings').Network.ipAddress.resourceGroup]",
+      "publicIPAddressDomainNameLabel" : "[steps('settings').Network.ipAddress.domainNameLabel]",
+      "publicIPAddressNewOrExisting" : "[steps('settings').Network.ipAddress.newOrExistingOrNone]",
+      "storageAccountName": "[steps('settings').Storage.storageAccount.name]",
+      "storageAccountType": "[steps('settings').Storage.storageAccount.type]",
+      "storageAccountResourceGroup": "[steps('settings').Storage.storageAccount.resourceGroup]",
+      "storageAccountNewOrExisting": "[steps('settings').Storage.storageAccount.newOrExisting]"
+    }
+  }
+}
