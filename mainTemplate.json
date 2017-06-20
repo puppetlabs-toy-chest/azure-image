@@ -177,7 +177,8 @@
     "vmSetupUrl":"[concat(parameters('templateBaseUrl'),'/compute-',parameters('authenticationType'),'.json')]",
     "networkSecurityGroupSetupUrl":"[concat(parameters('templateBaseUrl'),'/networkSecurityGroup.json')]"
   },
-  "resources": [
+  "resources":
+  [
     {
       "name": "SettingUpStorageAccount",
       "type": "Microsoft.Resources/deployments",
@@ -202,8 +203,7 @@
             "value": "[parameters('storageAccountResourceGroup')]"
           },
           "nicName": {
-            "value":"[parameters('nicName')]",
-            }
+            "value":"[parameters('nicName')]"
           }
         }
       }
@@ -232,8 +232,7 @@
             "value": "[parameters('publicIPAddressDomainNameLabel')]"
           },
           "nicName": {
-            "value":"[parameters('nicName')]",
-            }
+            "value":"[parameters('nicName')]"
           }
         }
       }
@@ -288,8 +287,7 @@
             "value": "[parameters('virtualNetworkResourceGroup')]"
           },
           "nicName": {
-            "value":"[parameters('nicName')]",
-            }
+            "value":"[parameters('nicName')]"
           }
         }
       }
@@ -347,8 +345,7 @@
             "value" : "[parameters('templateBaseUrl')]"
           },
           "nicName": {
-            "value":"[parameters('nicName')]",
-            }
+            "value":"[parameters('nicName')]"
           }
         }
       }
