@@ -201,9 +201,6 @@
           },
           "storageAccountResourceGroup": {
             "value": "[parameters('storageAccountResourceGroup')]"
-          },
-          "nicName": {
-            "value":"[parameters('nicName')]"
           }
         }
       }
