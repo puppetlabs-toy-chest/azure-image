@@ -32,7 +32,7 @@
     },
     "adminPassword": {
       "type":"securestring",
-      "defaultValue": "",
+      "defaultValue": "11TestManner!",
       "metadata":{
         "description":"Admin password"
       }
@@ -52,6 +52,7 @@
     },
     "authenticationType": {
       "type":"string",
+      "defaultValue": "password",
       "metadata":{
         "description":"Authentication Type"
       }
@@ -288,9 +289,9 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
+        "Microsoft.Resources/deployments/SettingUpPublicIPs",
         "Microsoft.Resources/deployments/SettingUpVirtualNetwork",
-        "Microsoft.Resources/deployments/SettingUpStorageAccount",
-        "Microsoft.Resources/deployments/SettingUpPublicIPs"
+        "Microsoft.Resources/deployments/SettingUpStorageAccount"
       ],
       "properties": {
         "mode": "Incremental",
