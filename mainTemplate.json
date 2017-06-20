@@ -128,14 +128,14 @@
     },
     "storageAccountName": {
       "type":"string",
-      "defaultValue":"puppetmasterstorageacc01",
+      "defaultValue":"puppetmstorageacc01",
       "metadata":{
         "description":"Storage Acccount Name"
       }
     },
     "storageAccountType": {
       "type":"string",
-      "defaultValue":"LRS",
+      "defaultValue":"Standard_LRS",
       "metadata":{
         "description":"Storage Acccount Type"
       }
@@ -227,9 +227,6 @@
           },
           "publicIPAddressDomainNameLabel": {
             "value": "[parameters('publicIPAddressDomainNameLabel')]"
-          },
-          "nicName": {
-            "value":"[parameters('nicName')]"
           }
         }
       }
@@ -282,9 +279,6 @@
           },
           "virtualNetworkResourceGroup": {
             "value": "[parameters('virtualNetworkResourceGroup')]"
-          },
-          "nicName": {
-            "value":"[parameters('nicName')]"
           }
         }
       }
@@ -342,7 +336,7 @@
             "value" : "[parameters('templateBaseUrl')]"
           },
           "nicName": {
-            "value":"[parameters('nicName')]"
+            "value": "[parameters('nicName')]"
           }
         }
       }
