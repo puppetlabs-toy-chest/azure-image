@@ -141,6 +141,13 @@
         "description":"NIC name"
       }
     },
+    "publicIPAddressDomainNameLabel": {
+      "type": "string",
+      "defaultValue":"puppetmdns",
+      "metadata":{
+        "description":"Public IP domain name prefix"
+      }
+    },
     "templateBaseUrl": {
       "type": "string",
       "metadata": {
@@ -178,7 +185,7 @@
           },
           "storageAccountName": {
             "value": "[parameters('storageAccountName')]"
-          },
+          }
         }
       }
     },
