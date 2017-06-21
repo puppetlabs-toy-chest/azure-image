@@ -81,11 +81,6 @@
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/', parameters('nicName'))]"
       ],
-      "plan": {
-        "name": "2016-1",
-        "product": "puppet-enterprise",
-        "publisher": "puppet"
-      },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
@@ -107,19 +102,17 @@
           "customData": "[base64(variables('customData'))]"
         },
         "storageProfile": {
-          "imageReference": {
-            "publisher": "[variables('imagePublisher')]",
-            "offer": "[variables('imageOffer')]",
-            "sku": "[variables('imageSku')]",
-            "version": "latest"
-          },
           "osDisk": {
-            "name": "osdisk",
-            "vhd": {
-              "uri": "[https://cftnortheurope.blob.core.windows.net/system/Microsoft.Compute/Images/puppet-enterprise/puppet-enterprise-osDisk.bfef9542-270f-4750-9559-82098761f6f2.vhd]"
-            },
             "caching": "ReadWrite",
-            "createOption": "FromImage"
+            "createOption": "FromImage",
+            "name": "osdisk",
+            "osType": "linux",
+            "image": {
+              "uri": "[concat('https', '://', parameters('storageAccountName'), '.blob.core.windows.net', '/system/Microsoft.Compute/Images/puppet-enterprise/puppet-enterprise-osDisk.bfef9542-270f-4750-9559-82098761f6f2.vhd')]"
+            },
+            "vhd": {
+              "uri": "[concat('https', '://', parameters('storageAccountName'), '.blob.core.windows.net', '/pecontainer/pemaster01.vhd')]"
+            }
           }
         },
         "networkProfile": {
