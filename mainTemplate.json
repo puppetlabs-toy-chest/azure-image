@@ -66,7 +66,7 @@
     },
     "virtualNetworkNewOrExisting": {
       "type":"string",
-      "defaultValue": "new",
+      "defaultValue": "existing",
       "metadata":{
         "description":"Virtual Network New Or Existing"
       }
@@ -94,14 +94,14 @@
     },
     "publicIPAddressNewOrExisting": {
       "type":"string",
-      "defaultValue": "new",
+      "defaultValue": "existing",
       "metadata":{
         "description":"Public IP Address New or Existing"
       }
     },
     "storageAccountName": {
       "type":"string",
-      "defaultValue":"puppetmstorageacc01",
+      "defaultValue":"cftnortheurope",
       "metadata":{
         "description":"Storage Acccount Name"
       }
@@ -115,7 +115,7 @@
     },
     "storageAccountNewOrExisting": {
       "type":"string",
-      "defaultValue":"new",
+      "defaultValue":"existing",
       "metadata":{
         "description":"Storage Acccount New or Existing"
       }
