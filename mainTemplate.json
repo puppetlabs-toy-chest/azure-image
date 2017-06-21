@@ -2,13 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "location": {
-      "type":"string",
-      "defaultValue": "northeurope",
-      "metadata":{
-        "description":"Location of deployment"
-      }
-    },
     "puppetMasterVmName": {
       "type":"string",
       "defaultValue": "puppetmaster",
@@ -62,13 +55,6 @@
       "defaultValue": "vnet01",
       "metadata":{
         "description":"Virtual Network Name"
-      }
-    },
-    "resourceGroup": {
-      "type":"string",
-      "defaultValue":"puppetmrg",
-      "metadata":{
-        "description":"Virtual Network Resource Group"
       }
     },
     "virtualNetworkAddressPrefix": {
@@ -178,7 +164,7 @@
         },
         "parameters": {
           "location": {
-            "value": "[parameters('location')]"
+            "value": "[resourceGroup().location]"
           },
           "storageAccountType": {
             "value": "[parameters('storageAccountType')]"
@@ -201,13 +187,13 @@
         },
         "parameters": {
           "location": {
-            "value": "[parameters('location')]"
+            "value": "[resourceGroup().location]"
           },
           "publicIPAddressName": {
             "value": "[parameters('publicIPAddressName')]"
           },
           "resourceGroup": {
-            "value": "[parameters('resourceGroup')]"
+            "value": "[resourceGroup().name]"
           },
           "publicIPAddressDomainNameLabel": {
             "value": "[parameters('publicIPAddressDomainNameLabel')]"
@@ -227,7 +213,7 @@
         },
         "parameters": {
           "location": {
-            "value": "[parameters('location')]"
+            "value": "[resourceGroup().location]"
           }
         }
       }
@@ -247,7 +233,7 @@
         },
         "parameters": {
           "location": {
-            "value": "[parameters('location')]"
+            "value": "[resourceGroup().location]"
           },
           "virtualNetworkName": {
             "value": "[parameters('virtualNetworkName')]"
@@ -281,10 +267,10 @@
         },
         "parameters": {
           "location": {
-            "value": "[parameters('location')]"
+            "value": "[resourceGroup().location]"
           },
           "publicIpAddressResourceId": {
-            "value": "[resourceId(parameters('resourceGroup'),'Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
+            "value": "[resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
           },
           "subnetRef": {
             "value": "[concat(resourceId('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')), '/subnets/', parameters('virtualNetworkSubnetName'))]"
@@ -311,7 +297,7 @@
             "value": "[parameters('storageAccountName')]"
           },
           "fqdn": {
-            "value": "[concat(parameters('publicIPAddressDomainNameLabel'), '.', tolower(replace(parameters('location'), ' ', '')), '.cloudapp.azure.com')]"
+            "value": "[concat(parameters('publicIPAddressDomainNameLabel'), '.', tolower(replace(resourceGroup().location, ' ', '')), '.cloudapp.azure.com')]"
           },
           "templateBaseUrl":{
             "value" : "[parameters('templateBaseUrl')]"

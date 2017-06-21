@@ -30,18 +30,6 @@
       "kind": "Storage",
       "properties": {
       }
-    },
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[concat(parameters('storageAccountName'),'2')]",
-      "apiVersion": "2016-01-01",
-      "location": "[parameters('location')]",
-      "sku": {
-          "name": "Standard_LRS"
-      },
-      "kind": "Storage",
-      "properties": {
-      }
     }
   ],
   "outputs": {
