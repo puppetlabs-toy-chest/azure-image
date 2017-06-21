@@ -11,7 +11,7 @@
     "publicIPAddressDomainNameLabel": {
       "type": "string"
     },
-    "publicIPAddressResourceGroup": {
+    "resourceGroup": {
       "type": "string"
     }
   },

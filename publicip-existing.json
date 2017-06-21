@@ -11,12 +11,12 @@
     "publicIPAddressDomainNameLabel": {
       "type": "string"
     },
-    "publicIPAddressResourceGroup": {
+    "resourceGroup": {
       "type": "string"
     }
   },
   "variables": {
-    "publicIpId": "[resourceId(parameters('publicIPAddressResourceGroup'),concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName'))]"
+    "publicIpId": "[resourceId(parameters('resourceGroup'),concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName'))]"
   },
   "resources": [],
   "outputs": {

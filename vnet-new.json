@@ -16,9 +16,6 @@
     },
     "virtualNetworkSubnetAddressPrefix": {
       "type": "string"
-    },
-    "virtualNetworkResourceGroup": {
-      "type": "string"
     }
   },
   "resources": [

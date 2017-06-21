@@ -64,9 +64,9 @@
         "description":"Virtual Network Name"
       }
     },
-    "virtualNetworkResourceGroup": {
+    "resourceGroup": {
       "type":"string",
-      "defaultValue":"puppetvnresgroup01",
+      "defaultValue":"puppetmrg",
       "metadata":{
         "description":"Virtual Network Resource Group"
       }
@@ -106,20 +106,6 @@
         "description":"Public IP Address Name"
       }
     },
-    "publicIPAddressResourceGroup": {
-      "type":"string",
-      "defaultValue":"pubipaddrresgroup01",
-      "metadata":{
-        "description":"Public IP Address Resource Group"
-      }
-    },
-    "publicIPAddressDomainNameLabel": {
-      "type":"string",
-      "defaultValue":"puppetmaster",
-      "metadata":{
-        "description":"Public IP Address Domain Name Label"
-      }
-    },
     "publicIPAddressNewOrExisting": {
       "type":"string",
       "defaultValue": "new",
@@ -139,13 +125,6 @@
       "defaultValue":"Standard_LRS",
       "metadata":{
         "description":"Storage Acccount Type"
-      }
-    },
-    "storageAccountResourceGroup": {
-      "type":"string",
-      "defaultValue":"puppetstorageresgroup01",
-      "metadata":{
-        "description":"Storage Acccount Resource Group"
       }
     },
     "storageAccountNewOrExisting": {
@@ -200,9 +179,6 @@
           "storageAccountName": {
             "value": "[parameters('storageAccountName')]"
           },
-          "storageAccountResourceGroup": {
-            "value": "[parameters('storageAccountResourceGroup')]"
-          }
         }
       }
     },
@@ -223,8 +199,8 @@
           "publicIPAddressName": {
             "value": "[parameters('publicIPAddressName')]"
           },
-          "publicIPAddressResourceGroup": {
-            "value": "[parameters('publicIPAddressResourceGroup')]"
+          "resourceGroup": {
+            "value": "[parameters('resourceGroup')]"
           },
           "publicIPAddressDomainNameLabel": {
             "value": "[parameters('publicIPAddressDomainNameLabel')]"
@@ -277,9 +253,6 @@
           },
           "virtualNetworkSubnetAddressPrefix": {
             "value": "[parameters('virtualNetworkSubnetAddressPrefix')]"
-          },
-          "virtualNetworkResourceGroup": {
-            "value": "[parameters('virtualNetworkResourceGroup')]"
           }
         }
       }
@@ -289,9 +262,9 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "Microsoft.Resources/deployments/SettingUpPublicIPs",
         "Microsoft.Resources/deployments/SettingUpVirtualNetwork",
-        "Microsoft.Resources/deployments/SettingUpStorageAccount"
+        "Microsoft.Resources/deployments/SettingUpStorageAccount",
+        "Microsoft.Resources/deployments/SettingUpPublicIPs"
       ],
       "properties": {
         "mode": "Incremental",
@@ -304,7 +277,7 @@
             "value": "[parameters('location')]"
           },
           "publicIpAddressResourceId": {
-            "value": "[resourceId(parameters('publicIPAddressResourceGroup'),'Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
+            "value": "[resourceId(parameters('resourceGroup'),'Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
           },
           "subnetRef": {
             "value": "[concat(resourceId('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')), '/subnets/', parameters('virtualNetworkSubnetName'))]"

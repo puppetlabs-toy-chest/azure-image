@@ -62,9 +62,6 @@
     "storageAccountType": {
       "value":"standard_lrs"
     },
-    "storageAccountResourceGroup": {
-      "value":"test"
-    },
     "storageAccountNewOrExisting": {
       "value":"new"
     },
