@@ -29,9 +29,6 @@
     "virtualNetworkName": {
       "value":"vnet01"
     },
-    "virtualNetworkResourceGroup": {
-      "value":"test"
-    },
     "virtualNetworkAddressPrefix": {
       "value":"10.0.0.0/16"
     },
@@ -46,9 +43,6 @@
     },
     "publicIPAddressName": {
       "value":"ip01"
-    },
-    "publicIPAddressResourceGroup": {
-      "value":"test"
     },
     "publicIPAddressDomainNameLabel": {
       "value":"dns198734"
