@@ -134,6 +134,12 @@
         "description":"Public IP domain name prefix"
       }
     },
+    "vhdName": {
+      "type": "string",
+      "metadata":{
+        "description":"The name of the vhd in the storage account, without the path"
+      }
+    },
     "templateBaseUrl": {
       "type": "string",
       "metadata": {
@@ -307,6 +313,9 @@
           },
           "nicName": {
             "value": "[parameters('nicName')]"
+          },
+          "vhdName": {
+            "value": "[parameters('vhdName')]"
           }
         }
       }
