@@ -318,6 +318,7 @@
           "vhdName": {
             "value": "[parameters('vhdName')]"
           }
+
         }
       }
     }
