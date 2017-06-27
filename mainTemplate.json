@@ -136,7 +136,7 @@
     },
     "vhdName": {
       "type": "string",
-      "defaultValue": "puppet-enterprise-osDisk.685e83e0-870e-4a3d-b72d-50f69776d7d6.vhd",
+      "defaultValue": "puppet-enterprise-osDisk.4c606d03-b876-42de-bf31-c6700d45a922.vhd",
       "metadata":{
         "description":"The name of the vhd in the storage account, without the path"
       }
@@ -305,6 +305,9 @@
           },
           "fqdn": {
             "value": "[concat(parameters('publicIPAddressDomainNameLabel'), '.', tolower(replace(resourceGroup().location, ' ', '')), '.cloudapp.azure.com')]"
+          },
+          publicIp: {
+            "value": "reference('SettingUpPublicIPs').outputs.publicIp.value"
           },
           "templateBaseUrl":{
             "value" : "[parameters('templateBaseUrl')]"
