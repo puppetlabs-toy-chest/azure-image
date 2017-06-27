@@ -306,7 +306,7 @@
           "fqdn": {
             "value": "[concat(parameters('publicIPAddressDomainNameLabel'), '.', tolower(replace(resourceGroup().location, ' ', '')), '.cloudapp.azure.com')]"
           },
-          publicIp: {
+          "publicIp": {
             "value": "reference('SettingUpPublicIPs').outputs.publicIp.value"
           },
           "templateBaseUrl":{
