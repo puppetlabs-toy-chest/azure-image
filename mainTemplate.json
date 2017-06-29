@@ -136,7 +136,7 @@
     },
     "vhdName": {
       "type": "string",
-      "defaultValue": "puppet-enterprise-gh-osDisk.305f15ba-b86e-4dc1-b9b7-8fbfb472f2b4.vhd",
+      "defaultValue": "puppet-enterprise-gh-osDisk.99f96257-97d5-4283-b5e1-e4f2b419f6b1.vhd",
       "metadata":{
         "description":"The name of the vhd in the storage account, without the path"
       }
@@ -264,7 +264,8 @@
       "dependsOn": [
         "Microsoft.Resources/deployments/SettingUpVirtualNetwork",
         "Microsoft.Resources/deployments/SettingUpStorageAccount",
-        "Microsoft.Resources/deployments/SettingUpPublicIPs"
+        "Microsoft.Resources/deployments/SettingUpPublicIPs",
+        "Microsoft.Resources/deployments/SettingUpNetworkSecurityGroup"
       ],
       "properties": {
         "mode": "Incremental",
