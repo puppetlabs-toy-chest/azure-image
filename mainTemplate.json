@@ -101,7 +101,7 @@
     },
     "storageAccountName": {
       "type":"string",
-      "defaultValue":"cftwestus2gh",
+      "defaultValue":"cftwestus2",
       "metadata":{
         "description":"Storage Acccount Name"
       }
@@ -136,7 +136,7 @@
     },
     "vhdName": {
       "type": "string",
-      "defaultValue": "puppet-enterprise-gh-osDisk.3701d570-669f-493e-a7ba-e7ab17971547.vhd",
+      "defaultValue": "puppet-enterprise-osDisk.7fb6905c-3b96-47ca-b849-78d5ac5ea808.vhd",
       "metadata":{
         "description":"The name of the vhd in the storage account, without the path"
       }
