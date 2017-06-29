@@ -321,6 +321,9 @@
           },
           "vhdName": {
             "value": "[parameters('vhdName')]"
+          },
+          "publicIpAddressResourceId": {
+            "value": "[reference('SettingUpNetworkSecurityGroup').outputs.networkSecurityGroupId.value]"
           }
 
         }
