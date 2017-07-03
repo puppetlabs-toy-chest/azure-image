@@ -41,7 +41,7 @@
       "type":"string",
       "defaultValue": "password",
       "metadata":{
-        "description":"Authentication Type"
+        "description":"Authentication Type [password|sshPublicKey]"
       }
     },
     "virtualNetworkName": {

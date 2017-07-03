@@ -94,7 +94,8 @@
       "name": "[parameters('puppetMasterVmName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicName'))]"
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicName'))]",
+        "[concat('Microsoft.Compute/images/', variables('imageName'))]"
       ],
       "properties": {
         "hardwareProfile": {
