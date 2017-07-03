@@ -315,6 +315,9 @@
           },
           "vhdName": {
             "value": "[parameters('vhdName')]"
+          },
+          "publicIp": {
+            "value": "[reference('SettingUpPublicIPs').outputs.publicIp.value)]"
           }
         }
       }
