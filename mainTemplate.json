@@ -136,7 +136,7 @@
     },
     "vhdName": {
       "type": "string",
-      "defaultValue": "puppet-enterprise-osDisk.54b138d2-209a-4a83-b624-2dfef564b9a0.vhd",
+      "defaultValue": "puppet-enterprise-osDisk.cec6b78b-8b7f-4212-9870-e411c38ff5da.vhd",
       "metadata":{
         "description":"The name of the vhd in the storage account, without the path"
       }
@@ -315,9 +315,6 @@
           },
           "vhdName": {
             "value": "[parameters('vhdName')]"
-          },
-          "publicIp": {
-            "value": "[reference('SettingUpPublicIPs').outputs.publicIp.value)]"
           }
         }
       }
