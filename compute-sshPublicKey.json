@@ -26,9 +26,6 @@
     "adminPassword": {
       "type": "securestring"
     },
-    "consolePassword": {
-      "type": "securestring"
-    },
     "sshPublicKey": {
       "type": "securestring"
     },

@@ -30,12 +30,6 @@
         "description":"Admin password"
       }
     },
-    "consolePassword": {
-      "type":"securestring",
-      "metadata":{
-        "description":"Console password"
-      }
-    },
     "sshPublicKey": {
       "type":"securestring",
       "defaultValue": "",
@@ -294,9 +288,6 @@
           },
           "adminPassword": {
             "value": "[parameters('adminPassword')]"
-          },
-          "consolePassword": {
-            "value": "[parameters('consolePassword')]"
           },
           "sshPublicKey": {
             "value": "[parameters('sshPublicKey')]"
