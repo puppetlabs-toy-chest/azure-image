@@ -129,7 +129,6 @@
     },
     "vhdName": {
       "type": "string",
-      "defaultValue": "",
       "metadata":{
         "description":"The name of the vhd in the storage account, without the path"
       }
