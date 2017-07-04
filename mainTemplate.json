@@ -25,21 +25,20 @@
     },
     "adminPassword": {
       "type":"securestring",
-      "defaultValue": "11TestManner!",
       "metadata":{
         "description":"Admin password"
       }
     },
     "sshPublicKey": {
       "type":"securestring",
-      "defaultValue": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuKyP9c4h3vujCk/b097W3R5PrrUr4/Up9QtWIn1hN3P3m59Cxa2Wmmre9fWVO2pCvfLMfy5kR+Jm8CLKCG/edGran32LAAKKA5AlZaJjA69S0YPLrMFN07myfGHy0yZj41sUZ95AS5xZRl21pQ77CULokNkXkZX+D0SeV5Y0Kth6oDQZrgfsLSLxwcEVW1MxvvaIb9cL3sRkJgw4w6+5m2zNg6saAFr1/YVu25G92dFxKaN/f3unGICSCxQgimSM+mKLjxlAW2xx1IotEULiHWR9zsTv/hthDldIvYRvj8ZRGreby7d1qWVjGSLZ1qE1Wct7yHVjmRHWtSqqPyflz",
+      "defaultValue": "",
       "metadata":{
         "description":"SSH key"
       }
     },
     "authenticationType": {
       "type":"string",
-      "defaultValue": "sshPublicKey",
+      "defaultValue": "password",
       "metadata":{
         "description":"Authentication Type [password|sshPublicKey]"
       }
