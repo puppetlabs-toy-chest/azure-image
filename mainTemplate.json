@@ -23,6 +23,13 @@
         "description":"Admin user name"
       }
     },
+    "authenticationType": {
+      "type":"string",
+      "defaultValue": "password",
+      "metadata":{
+        "description":"Authentication Type [password|sshPublicKey]"
+      }
+    },
     "adminPassword": {
       "type":"securestring",
       "metadata":{
@@ -36,11 +43,11 @@
         "description":"SSH key"
       }
     },
-    "authenticationType": {
+    "virtualNetworkNewOrExisting": {
       "type":"string",
-      "defaultValue": "password",
+      "defaultValue": "existing",
       "metadata":{
-        "description":"Authentication Type [password|sshPublicKey]"
+        "description":"Virtual Network New Or Existing"
       }
     },
     "virtualNetworkName": {
@@ -57,13 +64,6 @@
         "description":"Virtual Network Address Prefix"
       }
     },
-    "virtualNetworkNewOrExisting": {
-      "type":"string",
-      "defaultValue": "existing",
-      "metadata":{
-        "description":"Virtual Network New Or Existing"
-      }
-    },
     "virtualNetworkSubnetName": {
       "type":"string",
       "defaultValue": "subnet01puppetmaster",
@@ -78,6 +78,13 @@
         "description":"Virtual Network subnet address prefix"
       }
     },
+    "publicIPAddressNewOrExisting": {
+      "type":"string",
+      "defaultValue": "existing",
+      "metadata":{
+        "description":"Public IP Address New or Existing"
+      }
+    },
     "publicIPAddressName": {
       "type":"string",
       "defaultValue": "pip01puppetmaster",
@@ -85,11 +92,18 @@
         "description":"Public IP Address Name"
       }
     },
-    "publicIPAddressNewOrExisting": {
-      "type":"string",
-      "defaultValue": "existing",
+    "publicIPAddressDomainNameLabel": {
+      "type": "string",
+      "defaultValue":"puppetmdns",
       "metadata":{
-        "description":"Public IP Address New or Existing"
+        "description":"Public IP domain name prefix"
+      }
+    },
+    "storageAccountNewOrExisting": {
+      "type":"string",
+      "defaultValue":"existing",
+      "metadata":{
+        "description":"Storage Acccount New or Existing"
       }
     },
     "storageAccountName": {
@@ -106,25 +120,11 @@
         "description":"Storage Acccount Type"
       }
     },
-    "storageAccountNewOrExisting": {
-      "type":"string",
-      "defaultValue":"existing",
-      "metadata":{
-        "description":"Storage Acccount New or Existing"
-      }
-    },
     "nicName": {
       "type": "string",
       "defaultValue":"puppetnic01",
       "metadata":{
         "description":"NIC name"
-      }
-    },
-    "publicIPAddressDomainNameLabel": {
-      "type": "string",
-      "defaultValue":"puppetmdns",
-      "metadata":{
-        "description":"Public IP domain name prefix"
       }
     },
     "vhdName": {
