@@ -23,6 +23,12 @@
         "description":"Admin user name"
       }
     },
+    "consolePassword": {
+      "type":"securestring",
+      "metadata":{
+        "description":"Console password"
+      }
+    },
     "authenticationType": {
       "type":"string",
       "defaultValue": "password",
@@ -129,6 +135,7 @@
     },
     "vhdName": {
       "type": "string",
+      "defaultValue": "puppet-enterprise-osDisk.2385b4d7-b7ce-4b15-9e0b-2eaf078b0416.vhd",
       "metadata":{
         "description":"The name of the vhd in the storage account, without the path"
       }
@@ -286,6 +293,9 @@
           },
           "adminPassword": {
             "value": "[parameters('adminPassword')]"
+          },
+          "consolePassword": {
+            "value": "[parameters('consolePassword')]"
           },
           "sshPublicKey": {
             "value": "[parameters('sshPublicKey')]"
