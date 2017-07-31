@@ -135,7 +135,7 @@
     },
     "vhdName": {
       "type": "string",
-      "defaultValue": "puppet-enterprise-osDisk.2385b4d7-b7ce-4b15-9e0b-2eaf078b0416.vhd",
+      "defaultValue": "puppet-enterprise-osDisk.e1842d87-840a-4d71-9077-a9e53f18d33e.vhd",
       "metadata":{
         "description":"The name of the vhd in the storage account, without the path"
       }
