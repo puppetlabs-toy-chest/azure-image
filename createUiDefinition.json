@@ -88,9 +88,9 @@
                 },
                 "osPlatform": "Linux",
                 "imageReference": {
-                  "publisher": "Puppet",
-                  "offer": "Puppet-Enterprise",
-                  "sku": "2017-2"
+                  "publisher": "puppet",
+                  "offer": "puppet-enterprise",
+                  "sku": "2017.2.1"
                 },
                 "visible": true
               }

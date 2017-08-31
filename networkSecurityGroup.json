@@ -8,7 +8,7 @@
   },
   "resources": [
     {
-      "apiVersion": "2016-03-30",
+      "apiVersion": "2015-06-15",
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "puppetNetworkSecurityGroup",
       "location": "[parameters('location')]",
