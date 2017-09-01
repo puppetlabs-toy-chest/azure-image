@@ -140,7 +140,7 @@
         "artifactsBaseUrl": "",
         "description": "URL to acquire other templates"
       },
-      "defaultValue": "https://raw.githubusercontent.com/puppetlabs/custom-image/"
+      "defaultValue": "https://raw.githubusercontent.com/puppetlabs/custom-image"
     }
   },
   "variables": {
