@@ -134,7 +134,7 @@
         "artifactsBaseUrl": "",
         "description": "URL to acquire other templates"
       },
-      "defaultValue": "https://raw.githubusercontent.com/puppetlabs/azure-image/master/"
+      "defaultValue": "https://raw.githubusercontent.com/puppetlabs/azure-image/AzureStack/"
     }
   },
   "variables": {
@@ -149,7 +149,7 @@
     {
       "name": "SettingUpStorageAccount",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2015-01-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -164,7 +164,7 @@
             "value": "[parameters('storageAccountType')]"
           },
           "storageAccountName": {
-            "value": "[variables('storageAccountName')]"
+            "value": "[parameters('storageAccountName')]"
           }
         }
       }
@@ -172,7 +172,7 @@
     {
       "name": "SettingUpPublicIPs",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2015-01-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -198,7 +198,7 @@
     {
       "name": "SettingUpNetworkSecurityGroup",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2015-01-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -215,7 +215,7 @@
     {
       "name": "SettingUpVirtualNetwork",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2015-01-01",
       "dependsOn": [
         "Microsoft.Resources/deployments/SettingUpNetworkSecurityGroup"
       ],
@@ -247,7 +247,7 @@
     {
       "name": "ProvisioningPuppetEnterprise",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2015-01-01",
       "dependsOn": [
         "Microsoft.Resources/deployments/SettingUpVirtualNetwork",
         "Microsoft.Resources/deployments/SettingUpStorageAccount",
