@@ -23,7 +23,7 @@
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[parameters('storageAccountName')]",
       "apiVersion": "2016-01-01",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "sku": {
           "name": "[parameters('storageAccountType')]"
       },
