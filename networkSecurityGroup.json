@@ -100,14 +100,14 @@
           {
             "name": "https",
             "properties": {
-              "description": "MCollective",
+              "description": "https",
               "protocol": "tcp",
               "sourcePortRange": "*",
               "destinationPortRange": "443",
               "sourceAddressPrefix": "*",
               "destinationAddressPrefix": "*",
               "access": "Allow",
-              "priority": 103,
+              "priority": 106,
               "direction": "Inbound"
             }
           },
@@ -120,7 +120,7 @@
               "sourceAddressPrefix": "*",
               "destinationAddressPrefix": "*",
               "access": "Allow",
-              "priority": 104,
+              "priority": 107,
               "direction": "Inbound"
             }
           },
@@ -133,7 +133,7 @@
               "sourceAddressPrefix": "*",
               "destinationAddressPrefix": "*",
               "access": "Allow",
-              "priority": 105,
+              "priority": 108,
               "direction": "Inbound"
             }
           }
