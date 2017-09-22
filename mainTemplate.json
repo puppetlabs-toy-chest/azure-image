@@ -143,7 +143,7 @@
       "type": "string",
       "defaultValue": "new",      
       "metadata": {
-        "description": "Name of the public ip address"
+        "description": "Determines whether or not a new network security group should be provisioned."
       }
     },
     "networkSecurityGroupResourceGroupName": {
@@ -366,9 +366,6 @@
         "[parameters('networkSecurityGroupName')]"
       ],
       "properties": {
-        "networkSecurityGroup" :{
-          "id" : "[resourceId(parameters('networkSecurityGroupResourceGroupName'), 'Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
-        },
         "ipConfigurations": [
           {
             "name": "ipconfig1",
