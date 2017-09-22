@@ -1,63 +1,12 @@
 {
-  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "puppetMasterVmName": {
-      "value":"pup01"
-    },
-    "vmSize": {
-      "value":"Standard_D3_v2"
-    },
-    "adminUsername": {
-      "value":"admin123"
-    },
-    "adminPassword": {
-      "value":"Admin123_!"
-    },
-    "sshPublicKey": {
-      "value":""
-    },
-    "authenticationType": {
-      "value":"password"
-    },
-    "virtualNetworkName": {
-      "value":"vnet01"
-    },
-    "virtualNetworkAddressPrefix": {
-      "value":"10.0.0.0/16"
-    },
-    "virtualNetworkNewOrExisting": {
-      "value":"new"
-    },
-    "virtualNetworkSubnetName": {
-      "value":"sub01"
-    },
-    "virtualNetworkSubnetAddressPrefix": {
-      "value":"10.0.0.0/24"
-    },
-    "publicIPAddressName": {
-      "value":"ip01"
-    },
-    "publicIPAddressDomainNameLabel": {
-      "value":"dns198734"
-    },
-    "publicIPAddressNewOrExisting": {
-      "value":"new"
-    },
-    "storageAccountName": {
-      "value":"str198734"
-    },
-    "storageAccountType": {
-      "value":"standard_lrs"
-    },
-    "storageAccountNewOrExisting": {
-      "value":"new"
-    },
-    "nicName": {
-      "value": "testnic01pe"
-    },
-    "templateBaseUrl": {
-      "value": "https://raw.githubusercontent.com/puppetlabs/azure-image/master/"
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "value": "GEN-UNIQUE"
+        },
+        "adminPassword": {
+            "value": "GEN-PASSWORD"
+        }
     }
-  }
 }

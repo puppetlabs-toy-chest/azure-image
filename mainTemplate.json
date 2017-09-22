@@ -2,313 +2,454 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "puppetMasterVmName": {
-      "type":"string",
-      "defaultValue": "puppetmaster",
-      "metadata":{
-        "description":"VM Name"
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location to for the resources."
       }
     },
-    "vmSize": {
-      "type":"string",
-      "defaultValue": "Standard_D3_v2",
-      "metadata":{
-        "description":"VM Size"
+    "vmName": {
+      "type": "string",
+      "defaultValue": "linux-vm",
+      "metadata": {
+        "description": "Name for the Virtual Machine."
       }
     },
     "adminUsername": {
-      "type":"string",
       "defaultValue": "puppetadmin",
-      "metadata":{
-        "description":"Admin user name"
+      "type": "string",
+      "metadata": {
+        "description": "User name for the Virtual Machine."
       }
     },
     "authenticationType": {
-      "type":"string",
+      "type": "string",
       "defaultValue": "password",
-      "metadata":{
-        "description":"Authentication Type [password|sshPublicKey]"
+      "allowedValues": [
+        "password",
+        "sshPublicKey"
+      ],
+      "metadata": {
+        "description": "Type of authentication to use on the Virtual Machine."
       }
     },
     "adminPassword": {
-      "type":"securestring",
+      "type": "securestring",
       "defaultValue": "",
-      "metadata":{
-        "description":"Admin password"
+      "metadata": {
+        "description": "Password for the Virtual Machine."
       }
     },
     "sshPublicKey": {
-      "type":"securestring",
+      "type": "securestring",
       "defaultValue": "",
-      "metadata":{
-        "description":"SSH key"
+      "metadata": {
+        "description": "ssh key for the Virtual Machine."
       }
     },
-    "virtualNetworkNewOrExisting": {
-      "type":"string",
-      "defaultValue": "existing",
-      "metadata":{
-        "description":"Virtual Network New Or Existing"
-      }
-    },
-    "virtualNetworkName": {
-      "type":"string",
-      "defaultValue": "vnet01",
-      "metadata":{
-        "description":"Virtual Network Name"
-      }
-    },
-    "virtualNetworkAddressPrefix": {
-      "type":"string",
-      "defaultValue": "10.0.0.0/16",
-      "metadata":{
-        "description":"Virtual Network Address Prefix"
-      }
-    },
-    "virtualNetworkSubnetName": {
-      "type":"string",
-      "defaultValue": "subnet01puppetmaster",
-      "metadata":{
-        "description":"Virtual Network subnet name"
-      }
-    },
-    "virtualNetworkSubnetAddressPrefix": {
-      "type":"string",
-      "defaultValue": "10.0.0.0/24",
-      "metadata":{
-        "description":"Virtual Network subnet address prefix"
-      }
-    },
-    "publicIPAddressNewOrExisting": {
-      "type":"string",
-      "defaultValue": "existing",
-      "metadata":{
-        "description":"Public IP Address New or Existing"
-      }
-    },
-    "publicIPAddressName": {
-      "type":"string",
-      "defaultValue": "pip01puppetmaster",
-      "metadata":{
-        "description":"Public IP Address Name"
-      }
-    },
-    "publicIPAddressDomainNameLabel": {
+    "vmSize": {
       "type": "string",
-      "defaultValue":"puppetmdns",
-      "metadata":{
-        "description":"Public IP domain name prefix"
+      "defaultValue": "Standard_D3_v2",
+      "metadata": {
+        "description": "Size for the Virtual Machine."
       }
     },
-    "storageAccountNewOrExisting": {
-      "type":"string",
-      "defaultValue":"existing",
-      "metadata":{
-        "description":"Storage Acccount New or Existing"
+    "storageNewOrExisting": {
+      "type": "string",
+      "defaultValue": "new",
+      "metadata": {
+        "description": "Determines whether or not a new storage account should be provisioned."
       }
     },
     "storageAccountName": {
-      "type":"string",
-      "defaultValue":"cftwestus2",
-      "metadata":{
-        "description":"Storage Acccount Name"
+      "type": "string",
+      "defaultValue": "[concat('storage', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Name of the storage account"
       }
     },
     "storageAccountType": {
-      "type":"string",
-      "defaultValue":"Standard_LRS",
-      "metadata":{
-        "description":"Storage Acccount Type"
-      }
-    },
-    "nicName": {
       "type": "string",
-      "defaultValue":"puppetnic01",
-      "metadata":{
-        "description":"NIC name"
+      "defaultValue": "Standard_LRS",
+      "metadata": {
+        "description": "Storage account type"
       }
     },
-    "templateBaseUrl": {
+    "storageAccountResourceGroupName": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]",
+      "metadata": {
+        "description": "Name of the resource group for the existing storage account"
+      }
+    },
+    "virtualNetworkNewOrExisting": {
+      "type": "string",
+      "defaultValue": "new",
+      "metadata": {
+        "description": "Determines whether or not a new virtual network should be provisioned."
+      }
+    },
+    "virtualNetworkName": {
+      "type": "string",
+      "defaultValue": "VirtualNetwork",
+      "metadata": {
+        "description": "Name of the virtual network"
+      }
+    },
+    "addressPrefix": {
+      "type": "string",
+      "defaultValue": "10.0.0.0/16",
+      "metadata": {
+        "description": "Address prefix of the virtual network"
+      }
+    },
+    "subnetName": {
+      "type": "string",
+      "defaultValue": "default",
+      "metadata": {
+        "description": "Name of the subnet"
+      }
+    },
+    "subnetPrefix": {
+      "type": "string",
+      "defaultValue": "10.0.0.0/24",
+      "metadata": {
+        "description": "Subnet prefix of the virtual network"
+      }
+    },
+    "virtualNetworkResourceGroupName": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]",
+      "metadata": {
+        "description": "Name of the resource group for the existing virtual network"
+      }
+    },
+    "publicIpNewOrExisting": {
+      "type": "string",
+      "defaultValue": "new",
+      "metadata": {
+        "description": "Determines whether or not a new public ip should be provisioned."
+      }
+    },
+    "publicIpName": {
+      "type": "string",
+      "defaultValue": "PublicIp",
+      "metadata": {
+        "description": "Name of the public ip address"
+      }
+    },
+    "networkSecurityGroupNewOrExisting" :{
+      "type": "string",
+      "defaultValue": "new",      
+      "metadata": {
+        "description": "Name of the public ip address"
+      }
+    },
+    "networkSecurityGroupResourceGroupName": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]",
+      "metadata": {
+        "description": "Name of the resource group for the network security group"
+      }
+    },
+    "networkSecurityGroupName": {
       "type": "string",
       "metadata": {
-        "artifactsBaseUrl": "",
-        "description": "URL to acquire other templates"
-      },
-      "defaultValue": "https://raw.githubusercontent.com/puppetlabs/azure-image/master/"
+        "description": "Network Security Group for the nic"
+      }
+    },
+    "publicIpDns": {
+      "type": "string",
+      "metadata": {
+        "description": "DNS of the public ip address for the VM"
+      }
+    },
+    "publicIpResourceGroupName": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]",
+      "metadata": {
+        "description": "Name of the resource group for the public ip address"
+      }
     }
   },
   "variables": {
-    "storageAccountSetupUrl":"[concat(parameters('templateBaseUrl'),'/storage-',parameters('storageAccountNewOrExisting'),'.json')]",
-    "publicIpAddressSetupUrl":"[concat(parameters('templateBaseUrl'),'/publicip-',parameters('publicIPAddressNewOrExisting'),'.json')]",
-    "vnetSetupUrl":"[concat(parameters('templateBaseUrl'),'/vnet-',parameters('virtualNetworkNewOrExisting'),'.json')]",
-    "vmSetupUrl":"[concat(parameters('templateBaseUrl'),'/compute-',parameters('authenticationType'),'.json')]",
-    "networkSecurityGroupSetupUrl":"[concat(parameters('templateBaseUrl'),'/networkSecurityGroup.json')]"
+    "fqdn": "[concat(parameters('publicIpDns'), '.', tolower(replace(parameters('location'), ' ', '')), '.cloudapp.azure.com')]",
+    "nicName": "[concat(parameters('vmName'), '-nic')]",
+    "passwordAuth": {
+      "computerName": "[parameters('vmName')]",
+      "adminUsername": "[parameters('adminUsername')]",
+      "adminPassword": "[parameters('adminPassword')]"
+    },
+    "sshAuth": {
+      "computerName": "[parameters('vmName')]",
+      "adminUsername": "[parameters('adminUsername')]",
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": true,
+        "ssh": {
+          "publicKeys": [
+            {
+              "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]",
+              "keyData": "[parameters('sshPublicKey')]"
+            }
+          ]
+        }
+      }
+    }
   },
-  "resources":
-  [
+  "resources": [
     {
-      "name": "SettingUpStorageAccount",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "condition": "[equals(parameters('storageNewOrExisting'), 'new')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2017-06-01",
+      "name": "[parameters('storageAccountName')]",
+      "location": "[parameters('location')]",
+      "kind": "Storage",
+      "sku": {
+        "name": "[parameters('storageAccountType')]"
+      }
+    },
+    {
+      "condition": "[equals(parameters('publicIpNewOrExisting'), 'new')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2017-09-01",
+      "name": "[parameters('publicIpName')]",
+      "location": "[parameters('location')]",
       "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('storageAccountSetupURL')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "location": {
-            "value": "[resourceGroup().location]"
-          },
-          "storageAccountType": {
-            "value": "[parameters('storageAccountType')]"
-          },
-          "storageAccountName": {
-            "value": "[parameters('storageAccountName')]"
-          }
+        "publicIPAllocationMethod": "Dynamic",
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('publicIpDns')]"
         }
       }
     },
     {
-      "name": "SettingUpPublicIPs",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "condition": "[equals(parameters('networkSecurityGroupNewOrExisting'), 'new')]",      
+      "apiVersion": "2016-03-30",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "name": "parameters('networkSecurityGroupName')",
+      "location": "[parameters('location')]",
       "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('publicIpAddressSetupUrl')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "location": {
-            "value": "[resourceGroup().location]"
+        "securityRules": [
+          {
+            "name": "puppet",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "8140",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
           },
-          "publicIPAddressName": {
-            "value": "[parameters('publicIPAddressName')]"
+          {
+	          "name": "ssh",
+            "properties": {
+              "description": "Allow SSH",
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "22",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 201,
+              "direction": "Inbound"
+            }
           },
-          "resourceGroup": {
-            "value": "[resourceGroup().name]"
+          {
+            "name": "MCollective",
+            "properties": {
+              "description": "MCollective",
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "61613",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 102,
+              "direction": "Inbound"
+            }
           },
-          "publicIPAddressDomainNameLabel": {
-            "value": "[parameters('publicIPAddressDomainNameLabel')]"
+          {
+            "name": "https",
+            "properties": {
+              "description": "MCollective",
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "443",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 103,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "orchestrator",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "8142",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 104,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "rbac",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "4433",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 105,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "orchestratorpcp",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "8143",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 105,
+              "direction": "Inbound"
+            }
           }
-        }
+        ]
       }
     },
     {
-      "name": "SettingUpNetworkSecurityGroup",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('networkSecurityGroupSetupUrl')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "location": {
-            "value": "[resourceGroup().location]"
-          }
-        }
-      }
-    },
-    {
-      "name": "SettingUpVirtualNetwork",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2017-09-01",
+      "name": "[parameters('virtualNetworkName')]",
+      "location": "[parameters('location')]",
       "dependsOn": [
-        "Microsoft.Resources/deployments/SettingUpNetworkSecurityGroup"
+        "[parameters('networkSecurityGroupName')]"
       ],
       "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('vnetSetupUrl')]",
-          "contentVersion": "1.0.0.0"
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('addressPrefix')]"
+          ]
         },
-        "parameters": {
-          "location": {
-            "value": "[resourceGroup().location]"
-          },
-          "virtualNetworkName": {
-            "value": "[parameters('virtualNetworkName')]"
-          },
-          "virtualNetworkAddressPrefix": {
-            "value": "[parameters('virtualNetworkAddressPrefix')]"
-          },
-          "virtualNetworkSubnetName": {
-            "value": "[parameters('virtualNetworkSubnetName')]"
-          },
-          "virtualNetworkSubnetAddressPrefix": {
-            "value": "[parameters('virtualNetworkSubnetAddressPrefix')]"
+        "subnets": [
+          {
+            "name": "[parameters('subnetName')]",
+            "properties": {
+              "addressPrefix": "[parameters('subnetPrefix')]",
+              "networkSecurityGroup": {
+                "id": "[resourceId(parameters('networkSecurityGroupResourceGroupName'),'Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+                }
+            }
           }
-        }
+        ]
       }
     },
     {
-      "name": "ProvisioningPuppetEnterprise",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2017-09-01",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[variables('nicName')]",
+      "location": "[parameters('location')]",
       "dependsOn": [
-        "Microsoft.Resources/deployments/SettingUpVirtualNetwork",
-        "Microsoft.Resources/deployments/SettingUpStorageAccount",
-        "Microsoft.Resources/deployments/SettingUpPublicIPs",
-        "Microsoft.Resources/deployments/SettingUpNetworkSecurityGroup"
+        "[parameters('publicIpName')]",
+        "[parameters('virtualNetworkName')]",
+        "[parameters('networkSecurityGroupName')]"
       ],
       "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('vmSetupUrl')]",
-          "contentVersion": "1.0.0.0"
+        "networkSecurityGroup" :{
+          "id" : "[resourceId(parameters('networkSecurityGroupResourceGroupName'), 'Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
         },
-        "parameters": {
-          "location": {
-            "value": "[resourceGroup().location]"
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId(parameters('publicIpResourceGroupName'), 'Microsoft.Network/publicIPAddresses', parameters('publicIpName'))]"
+              },
+              "subnet": {
+                "id": "[resourceId(parameters('virtualNetworkResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('virtualNetworkName'), parameters('subnetName'))]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2017-03-30",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[parameters('vmName')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[parameters('storageAccountName')]",
+        "[variables('nicName')]"
+      ],
+      "plan": {
+        "name": "2017-2",
+        "product": "puppet-enterprise",
+        "publisher": "puppet"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmSize')]"
+        },
+        "osProfile": "[if(equals(parameters('authenticationType'), 'password'), variables('passwordAuth'), variables('sshAuth'))]",
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "Puppet",
+            "offer": "Puppet-Enterprise",
+            "sku": "2017-2",
+            "version": "latest"
           },
-          "publicIpAddressResourceId": {
-            "value": "[resourceId(resourceGroup().name,'Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
-          },
-          "subnetRef": {
-            "value": "[concat(resourceId('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')), '/subnets/', parameters('virtualNetworkSubnetName'))]"
-          },
-          "puppetMasterVmName": {
-            "value": "[parameters('puppetMasterVmName')]"
-          },
-          "vmSize": {
-            "value": "[parameters('vmSize')]"
-          },
-          "adminUserName": {
-            "value": "[parameters('adminUserName')]"
-          },
-          "adminPassword": {
-            "value": "[parameters('adminPassword')]"
-          },
-          "sshPublicKey": {
-            "value": "[parameters('sshPublicKey')]"
-          },
-          "storageAccountName": {
-            "value": "[parameters('storageAccountName')]"
-          },
-          "fqdn": {
-            "value": "[concat(parameters('publicIPAddressDomainNameLabel'), '.', tolower(replace(resourceGroup().location, ' ', '')), '.cloudapp.azure.com')]"
-          },
-          "templateBaseUrl":{
-            "value" : "[parameters('templateBaseUrl')]"
-          },
-          "nicName": {
-            "value": "[parameters('nicName')]"
+          "osDisk": {
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+            }
+          ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": "true",
+            "storageUri": "[reference(resourceId(parameters('storageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts/', parameters('storageAccountName')), '2017-06-01').primaryEndpoints.blob]"
           }
         }
       }
+      // },
+    // {
+    //     "type": "Microsoft.Compute/virtualMachines/extensions",
+    //     "name": "[concat(parameters('vmName'),'/CustomScriptExtension')]",
+    //     "apiVersion": "2017-03-30",
+    //     "location": "[parameters('location')]",
+    //     "dependsOn": [
+    //         "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
+    //         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+    //     ],
+    //     "properties": {
+    //        "publisher": "Microsoft.OSTCExtensions",
+    //        "type": "CustomScriptForLinux",
+    //        "typeHandlerVersion": "1.3",
+    //        "autoUpgradeMinorVersion" : "true",
+    //        "settings": {
+    //           "commandToExecute": "[concat('/opt/puppetlabs/azure/bin/init-pe.sh ', variables('fqdn'))]"
+    //        }
+    //    }
+    // }
     }
-  ],
-  "outputs" : {
-    "Puppet Enterprise Console FQDN:": {
-      "value": "[concat('https://',reference('SettingUpPublicIPs').outputs.fqdn.value)]",
-      "type": "string"
-    },
-    "Puppet Enterprise Console Username:": {
-      "value": "admin",
-      "type": "string"
-    }
-  }
+  ]
 }
