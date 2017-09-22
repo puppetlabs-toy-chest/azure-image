@@ -320,7 +320,7 @@
               "sourceAddressPrefix": "*",
               "destinationAddressPrefix": "*",
               "access": "Allow",
-              "priority": 105,
+              "priority": 106,
               "direction": "Inbound"
             }
           }
@@ -362,8 +362,7 @@
       "location": "[parameters('location')]",
       "dependsOn": [
         "[parameters('publicIpName')]",
-        "[parameters('virtualNetworkName')]",
-        "[parameters('networkSecurityGroupName')]"
+        "[parameters('virtualNetworkName')]"
       ],
       "properties": {
         "ipConfigurations": [
