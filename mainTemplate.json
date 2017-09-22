@@ -226,7 +226,7 @@
       "condition": "[equals(parameters('networkSecurityGroupNewOrExisting'), 'new')]",      
       "apiVersion": "2016-03-30",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "parameters('networkSecurityGroupName')",
+      "name": "[parameters('networkSecurityGroupName')]",
       "location": "[parameters('location')]",
       "properties": {
         "securityRules": [
