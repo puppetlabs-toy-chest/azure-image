@@ -430,27 +430,5 @@
           }
         }
       }
-    }
-        // },
-    // {
-    //     "type": "Microsoft.Compute/virtualMachines/extensions",
-    //     "name": "[concat(parameters('vmName'),'/CustomScriptExtension')]",
-    //     "apiVersion": "2017-03-30",
-    //     "location": "[parameters('location')]",
-    //     "dependsOn": [
-    //         "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
-    //         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
-    //     ],
-    //     "properties": {
-    //        "publisher": "Microsoft.OSTCExtensions",
-    //        "type": "CustomScriptForLinux",
-    //        "typeHandlerVersion": "1.3",
-    //        "autoUpgradeMinorVersion" : "true",
-    //        "settings": {
-    //           "commandToExecute": "[concat('/opt/puppetlabs/azure/bin/init-pe.sh ', variables('fqdn'))]"
-    //        }
-    //    }
-    // }
-
-  ]
+    }]
 }
