@@ -13,7 +13,6 @@
     },
     "resourceGroup": {
       "type": "string"
-    }
   },
   "resources": [
     {
@@ -34,11 +33,11 @@
       "value": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName'))]",
       "type": "string"
     },
-    "fqdn": {
+   "fqdn": {
       "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName')),providers('Microsoft.Network', 'publicIPAddresses').apiVersions[0]).dnsSettings.fqdn]",
       "type": "string"
     },
-    "publicIp": {
+   "publicIp": {
       "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName')),providers('Microsoft.Network', 'publicIPAddresses').apiVersions[0]).properties.ipAddress]",
       "type": "string"
     }

@@ -153,7 +153,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('storageAccountSetupURL')]",
+          "uri": "[variables('storageAccountSetupUrl')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -173,6 +173,9 @@
       "name": "SettingUpPublicIPs",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/SettingUpStorageAccount"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -182,7 +185,7 @@
         "parameters": {
           "location": {
             "value": "[resourceGroup().location]"
-          },
+        },
           "publicIPAddressName": {
             "value": "[parameters('publicIPAddressName')]"
           },
