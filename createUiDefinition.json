@@ -65,9 +65,19 @@
                         "label": "Virtual machine size",
                         "toolTip": "The size of virtual machine to provision.",
                         "recommendedSizes": [
-                            "Standard_D2_v2",
-                            "Standard_A2_v2"
+                            "Standard_D3_v2"
                         ],
+                        "constraints": {
+                          "excludedSizes": [
+                            "Standard_A0",
+                            "Standard_A1",
+                            "Basic_A0",
+                            "Basic_A1",
+                            "Basic_A2",
+                            "Basic_A3",
+                            "Basic_A5"
+                          ]
+                        },
                         "osPlatform": "Linux",
                         "count": "1"
                     },
@@ -169,12 +179,11 @@
             "subnetName": "[steps('VirtualMachineConfig').virtualNetwork.subnets.subnet1.name]",
             "subnetPrefix": "[steps('VirtualMachineConfig').virtualNetwork.subnets.subnet1.addressPrefix]",
             "virtualNetworkResourceGroupName": "[steps('VirtualMachineConfig').virtualNetwork.resourceGroup]",
-
+            
             "publicIpNewOrExisting": "[steps('VirtualMachineConfig').publicIpAddress.newOrExistingOrNone]",
             "publicIpName": "[steps('VirtualMachineConfig').publicIpAddress.name]",
             "publicIpDns": "[steps('VirtualMachineConfig').publicIpAddress.domainNameLabel]",
             "publicIpResourceGroupName": "[steps('VirtualMachineConfig').publicIpAddress.resourceGroup]"
-
         }
     }
 }

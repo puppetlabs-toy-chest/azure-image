@@ -139,26 +139,6 @@
         "description": "Name of the public ip address"
       }
     },
-    "networkSecurityGroupNewOrExisting" :{
-      "type": "string",
-      "defaultValue": "new",      
-      "metadata": {
-        "description": "Determines whether or not a new network security group should be provisioned."
-      }
-    },
-    "networkSecurityGroupResourceGroupName": {
-      "type": "string",
-      "defaultValue": "[resourceGroup().name]",
-      "metadata": {
-        "description": "Name of the resource group for the network security group"
-      }
-    },
-    "networkSecurityGroupName": {
-      "type": "string",
-      "metadata": {
-        "description": "Network Security Group for the nic"
-      }
-    },
     "publicIpDns": {
       "type": "string",
       "metadata": {
@@ -176,6 +156,7 @@
   "variables": {
     "fqdn": "[concat(parameters('publicIpDns'), '.', tolower(replace(parameters('location'), ' ', '')), '.cloudapp.azure.com')]",
     "nicName": "[concat(parameters('vmName'), '-nic')]",
+    "networkSecurityGroupName": "[concat(parameters('vmName'), '-sg')]",
     "passwordAuth": {
       "computerName": "[parameters('vmName')]",
       "adminUsername": "[parameters('adminUsername')]",
@@ -223,10 +204,9 @@
       }
     },
     {
-      "condition": "[equals(parameters('networkSecurityGroupNewOrExisting'), 'new')]",      
       "apiVersion": "2016-03-30",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[parameters('networkSecurityGroupName')]",
+      "name": "[variables('networkSecurityGroupName')]",
       "location": "[parameters('location')]",
       "properties": {
         "securityRules": [
@@ -334,7 +314,7 @@
       "name": "[parameters('virtualNetworkName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[parameters('networkSecurityGroupName')]"
+        "[variables('networkSecurityGroupName')]"
       ],
       "properties": {
         "addressSpace": {
@@ -348,7 +328,7 @@
             "properties": {
               "addressPrefix": "[parameters('subnetPrefix')]",
               "networkSecurityGroup": {
-                "id": "[resourceId(parameters('networkSecurityGroupResourceGroupName'),'Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]"
                 }
             }
           }
@@ -426,5 +406,25 @@
           }
         }
       }
-    }]
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'),'/CustomScriptExtension')]",
+      "apiVersion": "2016-03-30",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.OSTCExtensions",
+        "type": "CustomScriptForLinux",
+        "typeHandlerVersion": "1.3",
+        "autoUpgradeMinorVersion" : "true",
+        "settings": {
+          "commandToExecute": "[concat('/opt/puppetlabs/azure/bin/init-pe.sh ', variables('fqdn'))]"
+        }
+      }
+    }
+  ]
 }
