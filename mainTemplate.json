@@ -191,9 +191,12 @@
           },
           "publicIPAddressDomainNameLabel": {
             "value": "[parameters('publicIPAddressDomainNameLabel')]"
-          }
+          },
+          "resourceGroup": {
+           "value": "[resourceGroup().name]"
         }
       }
+     }
     },
     {
       "name": "SettingUpNetworkSecurityGroup",
