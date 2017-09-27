@@ -202,6 +202,9 @@
       "name": "SettingUpNetworkSecurityGroup",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/SettingUpStorageAccount"
+      ], 
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -220,6 +223,7 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
+        "Microsoft.Resources/deployments/SettingUpStorageAccount",
         "Microsoft.Resources/deployments/SettingUpNetworkSecurityGroup"
       ],
       "properties": {
