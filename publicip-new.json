@@ -20,6 +20,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[parameters('publicIPAddressName')]",
       "location": "[resourceGroup().location]",
+      "resourceGroupName" : "[parameter('resourceGroup')]",
       "properties": {
         "publicIPAllocationMethod": "Dynamic",
         "dnsSettings": {
