@@ -189,9 +189,6 @@
           "publicIPAddressName": {
             "value": "[parameters('publicIPAddressName')]"
           },
-          "resourceGroup": {
-            "value": "[resourceGroup().name]"
-          },
           "publicIPAddressDomainNameLabel": {
             "value": "[parameters('publicIPAddressDomainNameLabel')]"
           }
