@@ -1,53 +1,50 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "location": {
-      "type": "string"
-    },
-    "virtualNetworkName": {
-      "type": "string"
-    },
-    "virtualNetworkAddressPrefix": {
-      "type": "string"
-    },
-    "virtualNetworkSubnetName": {
-      "type": "string"
-    },
-    "virtualNetworkSubnetAddressPrefix": {
-      "type": "string"
-    }
-  },
-  "resources": [
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[parameters('virtualNetworkName')]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[parameters('virtualNetworkAddressPrefix')]"
-          ]
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworkName": {
+            "type": "string"
         },
-        "subnets": [
-          {
-            "name": "[parameters('virtualNetworkSubnetName')]",
+        "virtualNetworkAddressPrefix": {
+            "type": "string"
+        },
+        "virtualNetworkSubnetName": {
+            "type": "string"
+        },
+        "virtualNetworkSubnetAddressPrefix": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-06-15",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworkName')]",
+            "location": "[resourceGroup().location]",
             "properties": {
-              "addressPrefix": "[parameters('virtualNetworkSubnetAddressPrefix')]",
-              "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'puppetNetworkSecurityGroup')]"
-              }
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('virtualNetworkAddressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('virtualNetworkSubnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('virtualNetworkSubnetAddressPrefix')]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'puppetNetworkSecurityGroup')]"
+                            }
+                        }
+                    }
+                ]
             }
-          }
-        ]
-      }
+        }
+    ],
+    "outputs": {
+        "subnetRef": {
+            "value": "[concat(resourceId('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')), '/subnets/',parameters('virtualNetworkSubnetName'))]",
+            "type": "string"
+        }
     }
-  ],
-  "outputs": {
-    "subnetRef": {
-      "value": "[concat(resourceId('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')), '/subnets/',parameters('virtualNetworkSubnetName'))]",
-      "type": "string"
-    }
-  }
 }
