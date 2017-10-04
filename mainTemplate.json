@@ -134,7 +134,7 @@
                 "artifactsBaseUrl": "",
                 "description": "URL to acquire other templates"
             },
-            "defaultValue": "https://raw.githubusercontent.com/mattmcspirit/azure-image/AzureStack"
+            "defaultValue": "https://raw.githubusercontent.com/puppetlabs/azure-image/AzureStack"
         }
     },
     "variables": {
