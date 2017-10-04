@@ -5,12 +5,12 @@
         "publicIPAddressName": {
             "type": "string"
         },
-        "resourceGroup": {
+        "publicIPAddressDomainNameLabel": {
             "type": "string"
         }
     },
     "variables": {
-        "publicIpId": "[resourceId(parameters('resourceGroup'),concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName'))]"
+        "publicIpId": "[resourceId('resourceGroup().location'),concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName')]"
     },
     "resources": [],
     "outputs": {
