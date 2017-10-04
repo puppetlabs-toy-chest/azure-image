@@ -25,9 +25,10 @@
         }
     },
     "variables": {
-        "imagePublisher": "puppet",
-        "imageOffer": "puppet-enterprise",
-        "imageSku": "2017.2.1",
+        "imagePublisher": "Puppet",
+        "imageOffer": "Puppet-Enterprise",
+        "imageSku": "2017-2",
+        "version": "2017.2.1",
         "OSDiskName": "osdisk1",
         "vmStorageAccountContainerName": "vhds"
     },
@@ -67,7 +68,7 @@
                         "publisher": "[variables('imagePublisher')]",
                         "offer": "[variables('imageOffer')]",
                         "sku": "[variables('imageSku')]",
-                        "version": "2017.2.1"
+                        "version": "[variables('version')]"
                     },
                     "osDisk": {
                         "name": "osdisk",

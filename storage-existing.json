@@ -6,28 +6,16 @@
             "type": "string",
             "metadata": {
                 "Description": "The name of the new storage account created to store the VMs disks"
-            }    
-         },
-         "storageAccountType": {
-             "type": "string",
-             "metadata": {
-                 "Description": "The type of the Storage Account created"
-             }
+            }
+        },
+        "storageAccountType": {
+            "type": "string",
+            "metadata": {
+                "Description": "The type of the Storage Account created"
+            }
         }
-    }, 
-    "resources": [
-        {
-            "type": "Microsoft.Storage/storageAccounts",
-            "name": "[parameters('storageAccountName')]",
-            "apiVersion": "2016-01-01",
-            "location": "[resourceGroup().location]",
-            "sku": {
-                "name": "Standard_LRS"
-            },
-            "kind": "Storage",
-            "properties": {}
-        }
-    ],
+    },
+    "resources": [],
     "outputs": {
         "storageAccountId": {
             "value": "[resourceId('Microsoft.Storage/StorageAccounts',parameters('storageAccountName'))]",

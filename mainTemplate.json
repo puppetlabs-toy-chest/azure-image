@@ -46,14 +46,14 @@
         },
         "virtualNetworkNewOrExisting": {
             "type": "string",
-            "defaultValue": "existing",
+            "defaultValue": "new",
             "metadata": {
                 "description": "Virtual Network New Or Existing"
             }
         },
         "virtualNetworkName": {
             "type": "string",
-            "defaultValue": "vnet01",
+            "defaultValue": "puppet_vnet",
             "metadata": {
                 "description": "Virtual Network Name"
             }
@@ -67,7 +67,7 @@
         },
         "virtualNetworkSubnetName": {
             "type": "string",
-            "defaultValue": "subnet01puppetmaster",
+            "defaultValue": "puppet_subnet",
             "metadata": {
                 "description": "Virtual Network subnet name"
             }
@@ -81,35 +81,35 @@
         },
         "publicIPAddressNewOrExisting": {
             "type": "string",
-            "defaultValue": "existing",
+            "defaultValue": "new",
             "metadata": {
                 "description": "Public IP Address New or Existing"
             }
         },
         "publicIPAddressName": {
             "type": "string",
-            "defaultValue": "pip01puppetmaster",
+            "defaultValue": "puppetmaster_ip",
             "metadata": {
                 "description": "Public IP Address Name"
             }
         },
         "publicIPAddressDomainNameLabel": {
             "type": "string",
-            "defaultValue": "puppetmdns",
+            "defaultValue": "puppetmaster",
             "metadata": {
                 "description": "Public IP domain name prefix"
             }
         },
         "storageAccountNewOrExisting": {
             "type": "string",
-            "defaultValue": "existing",
+            "defaultValue": "new",
             "metadata": {
                 "description": "Storage Acccount New or Existing"
             }
         },
         "storageAccountName": {
             "type": "string",
-            "defaultValue": "cftwestus2",
+            "defaultValue": "concat('puppetstor_',substring(guid(),0,4))",
             "metadata": {
                 "description": "Storage Acccount Name"
             }
@@ -123,7 +123,7 @@
         },
         "nicName": {
             "type": "string",
-            "defaultValue": "puppetnic01",
+            "defaultValue": "puppetmaster_nic",
             "metadata": {
                 "description": "NIC name"
             }
@@ -134,7 +134,7 @@
                 "artifactsBaseUrl": "",
                 "description": "URL to acquire other templates"
             },
-            "defaultValue": "https://raw.githubusercontent.com/puppetlabs/azure-image/AzureStack"
+            "defaultValue": "https://raw.githubusercontent.com/mattmcspirit/azure-image/AzureStack"
         }
     },
     "variables": {
