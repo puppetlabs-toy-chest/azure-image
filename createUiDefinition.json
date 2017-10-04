@@ -34,6 +34,7 @@
                                 "name": "adminUsername",
                                 "type": "Microsoft.Compute.UserNameTextBox",
                                 "label": "Username",
+                                "defaultValue": "puppetadmin",
                                 "toolTip": "Admin username for the Puppet Enterprise master",
                                 "osPlatform": "Linux",
                                 "constraints": {
@@ -67,8 +68,8 @@
                             {
                                 "name": "vmSize",
                                 "type": "Microsoft.Compute.SizeSelector",
-                                "label": "Size",
-                                "toolTip": "",
+                                "label": "Virtual Machine Size",
+                                "toolTip": "The size of virtual machine to provision.",
                                 "recommendedSizes": [
                                     "Standard_D3_v2",
                                     "Standard_D3",
@@ -87,11 +88,6 @@
                                     ]
                                 },
                                 "osPlatform": "Linux",
-                                "imageReference": {
-                                    "publisher": "puppet",
-                                    "offer": "puppet-enterprise",
-                                    "sku": "2017.2.1"
-                                },
                                 "visible": true
                             }
                         ],
@@ -114,8 +110,8 @@
                                     "domainNameLabel": "DNS label for Puppet Enterprise master"
                                 },
                                 "defaultValue": {
-                                    "publicIpAddressName": "ip01",
-                                    "domainNameLabel": "[concat('puppet',substring(guid(),0,4))]"
+                                    "publicIpAddressName": "puppetmaster_ip",
+                                    "domainNameLabel": "[concat('puppetmaster',substring(guid(),0,4))]"
                                 },
                                 "options": {
                                     "hideNone": true,
@@ -124,6 +120,39 @@
                                 "constraints": {
                                     "required": {
                                         "domainNameLabel": true
+                                    }
+                                }
+                            },
+                            {
+                                "name": "virtualNetwork",
+                                "type": "Microsoft.Network.VirtualNetworkCombo",
+                                "label": {
+                                    "virtualNetwork": "Virtual network",
+                                    "subnets": "Subnets"
+                                },
+                                "toolTip": {
+                                    "virtualNetwork": "Virtual Network Name",
+                                    "subnets": "Subnets requied for Puppet Enterprise"
+                                },
+                                "defaultValue": {
+                                    "name": "puppetmaster_vnet",
+                                    "addressPrefixSize": "/16"
+                                },
+                                "constraints": {
+                                    "minAddressPrefixSize": "/16"
+                                },
+                                "subnets": {
+                                    "subnet1": {
+                                        "label": "Puppet subnet",
+                                        "defaultValue": {
+                                            "name": "puppetmaster_subnet",
+                                            "addressPrefixSize": "/24"
+                                        },
+                                        "constraints": {
+                                            "minAddressPrefixSize": "/24",
+                                            "minAddressCount": 12,
+                                            "requireContiguousAddresses": false
+                                        }
                                     }
                                 }
                             }
@@ -141,7 +170,7 @@
                                 "label": "Storage account",
                                 "toolTip": "Storage account for the Virtual Machine disks",
                                 "defaultValue": {
-                                    "name": "[concat('str',substring(guid(),0,4))]",
+                                    "name": "[concat('puppetstor_',substring(guid(),0,4))]",
                                     "type": "Standard_LRS"
                                 },
                                 "constraints": {
@@ -172,6 +201,11 @@
             "publicIPAddressName": "[steps('settings').Network.ipAddress.name]",
             "publicIPAddressDomainNameLabel": "[steps('settings').Network.ipAddress.domainNameLabel]",
             "publicIPAddressNewOrExisting": "[steps('settings').Network.ipAddress.newOrExistingOrNone]",
+            "virtualNetworkAddressPrefix": "[steps('settings').Network.virtualNetwork.addressPrefix]",
+            "virtualNetworkName": "[steps('settings').Network.virtualNetwork.name]",
+            "virtualNetworkNewOrExisting": "[steps('settings').Network.virtualNetwork.newOrExisting]",
+            "subnetName": "[steps('settings').Network.virtualNetwork.subnets.subnet1.name]",
+            "subnetPrefix": "[steps('settings').Network.virtualNetwork.subnets.subnet1.addressPrefix]",
             "storageAccountName": "[steps('settings').Storage.storageAccount.name]",
             "storageAccountType": "[steps('settings').Storage.storageAccount.type]",
             "storageAccountNewOrExisting": "[steps('settings').Storage.storageAccount.newOrExisting]"
