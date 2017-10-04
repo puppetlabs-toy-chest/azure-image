@@ -13,7 +13,7 @@
   "resources": [],
   "outputs": {
     "publicIpId": {
-      "value": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName'))]",
+      "value": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
       "type": "string"
     },
     "fqdn": {
