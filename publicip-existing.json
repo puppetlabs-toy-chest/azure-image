@@ -1,24 +1,24 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "publicIPAddressName": {
-            "type": "string"
-        },
-        "publicIPAddressDomainNameLabel": {
-            "type": "string"
-        }
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "publicIPAddressName": {
+      "type": "string"
     },
-    "variables": {},
-    "resources": [],
-    "outputs": {
-        "publicIpId": {
-            "value": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]",
-            "type": "string"
-        },
-        "fqdn": {
-            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))).dnsSettings.fqdn]",
-            "type": "string"
-        }
+    "publicIPAddressDomainNameLabel": {
+      "type": "string"
     }
+  },
+  "variables": {},
+  "resources": [],
+  "outputs": {
+    "publicIpId": {
+      "value": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]",
+      "type": "string"
+    },
+    "fqdn": {
+      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))).dnsSettings.fqdn]",
+      "type": "string"
+    }
+  }
 }
