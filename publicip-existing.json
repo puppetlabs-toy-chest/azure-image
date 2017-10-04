@@ -9,13 +9,23 @@
             "type": "string"
         }
     },
-    "variables": {
-        "publicIpId": "[resourceId('resourceGroup().location'),concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName')]"
-    },
-    "resources": [],
+    "resources": [
+        {
+            "apiVersion": "2015-06-15",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddressName')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('publicIPAddressDomainNameLabel')]"
+                }
+            }
+        }
+    ],
     "outputs": {
         "publicIpId": {
-            "value": "[variables('publicIpId')]",
+            "value": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]",
             "type": "string"
         },
         "fqdn": {
