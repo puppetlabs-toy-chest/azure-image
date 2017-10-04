@@ -156,9 +156,6 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "location": {
-                        "value": "[resourceGroup().location]"
-                    },
                     "storageAccountType": {
                         "value": "[parameters('storageAccountType')]"
                     },
@@ -179,11 +176,7 @@
                     "uri": "[variables('networkSecurityGroupSetupUrl')]",
                     "contentVersion": "1.0.0.0"
                 },
-                "parameters": {
-                    "location": {
-                        "value": "[resourceGroup().location]"
-                    }
-                }
+                "parameters": {}
             }
         },
         {
@@ -200,9 +193,6 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "location": {
-                        "value": "[resourceGroup().location]"
-                    },
                     "virtualNetworkName": {
                         "value": "[parameters('virtualNetworkName')]"
                     },
@@ -230,17 +220,11 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "location": {
-                        "value": "[resourceGroup().location]"
-                    },
                     "publicIPAddressName": {
                         "value": "[parameters('publicIPAddressName')]"
                     },
                     "publicIPAddressDomainNameLabel": {
                         "value": "[parameters('publicIPAddressDomainNameLabel')]"
-                    },
-                    "resourceGroup": {
-                        "value": "[resourceGroup().name]"
                     }
                 }
             }
@@ -289,15 +273,6 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "location": {
-                        "value": "[resourceGroup().location]"
-                    },
-                    "publicIpAddressResourceId": {
-                        "value": "[reference('SettingUpPublicIPs').outputs.publicIpId.value]"
-                    },
-                    "subnetRef": {
-                        "value": "[reference('SettingUpVirtualNetwork').outputs.subnetRef.value]"
-                    },
                     "puppetMasterVmName": {
                         "value": "[parameters('puppetMasterVmName')]"
                     },
@@ -318,9 +293,6 @@
                     },
                     "fqdn": {
                         "value": "[reference('SettingUpPublicIPs').outputs.fqdn.value]"
-                    },
-                    "templateBaseUrl": {
-                        "value": "[parameters('templateBaseUrl')]"
                     },
                     "nicName": {
                         "value": "[parameters('nicName')]"
