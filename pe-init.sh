@@ -63,4 +63,4 @@ rm -f ${PE_SOURCE}.tar.gz
 yum clean all
 rm -rf /var/cache/yum/x86_64/7/puppet_enterprise
 echo 'eval `ssh-agent`'>> ~/.bashrc
-#history -c
+history -c
