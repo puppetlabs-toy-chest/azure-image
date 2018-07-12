@@ -414,7 +414,7 @@
             ]
           },
           "commandToExecute": {
-            "value": "[concat('sh init-pe.sh ', variables('fqdn'))]"
+            "value": "[concat('sh pe-init.sh ', variables('fqdn'))]"
           }
         }
       },
