@@ -4,6 +4,9 @@ yum install -y wget nano less cronie openssh-clients openssh-server openssh open
 hostnamectl set-hostname $1
 echo "`hostname -I` `hostname`"	>> /etc/hosts
 
+systemctl start firewalld
+systemctl enable firewalld
+firewall-cmd --zone=public --add-port=22/tcp --permanent
 firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --zone=public --add-port=4432/tcp --permanent
 firewall-cmd --zone=public --add-port=4433/tcp --permanent
