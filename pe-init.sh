@@ -2,6 +2,7 @@
 yum install -y wget nano less cronie openssh-clients openssh-server openssh openssl cifs-utils
 
 hostnamectl set-hostname $1
+echo "`hostname -I` `hostname`"	>> /etc/hosts
 
 mkdir -p /etc/puppetlabs/puppet
 mkdir -p /etc/puppetlabs/puppetserver/ssh
