@@ -4,6 +4,18 @@ yum install -y wget nano less cronie openssh-clients openssh-server openssh open
 hostnamectl set-hostname $1
 echo "`hostname -I` `hostname`"	>> /etc/hosts
 
+firewall-cmd --zone=public --add-port=443/tcp --permanent
+firewall-cmd --zone=public --add-port=4432/tcp --permanent
+firewall-cmd --zone=public --add-port=4433/tcp --permanent
+firewall-cmd --zone=public --add-port=5432/tcp --permanent
+firewall-cmd --zone=public --add-port=8080/tcp --permanent
+firewall-cmd --zone=public --add-port=8081/tcp --permanent
+firewall-cmd --zone=public --add-port=8140/tcp --permanent
+firewall-cmd --zone=public --add-port=8142/tcp --permanent
+firewall-cmd --zone=public --add-port=8143/tcp --permanent
+firewall-cmd --zone=public --add-port=8170/tcp --permanent
+firewall-cmd --reload
+
 mkdir -p /etc/puppetlabs/puppet
 mkdir -p /etc/puppetlabs/puppetserver/ssh
 ssh-keygen -t rsa -b 4096 -N "" -f /etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa
