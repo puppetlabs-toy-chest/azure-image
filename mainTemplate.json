@@ -410,7 +410,7 @@
           },
           "fileUris": {
             "value": [
-              "https://raw.githubusercontent.com/kreeuwijk/azure-image/master/pe-init.sh"
+              "https://raw.githubusercontent.com/puppetlabs/azure-image/master/pe-init.sh"
             ]
           },
           "commandToExecute": {
