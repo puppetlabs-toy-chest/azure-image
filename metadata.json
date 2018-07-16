@@ -3,5 +3,5 @@
   "description": "This template launches a Puppet Enterprise Master VM",
   "summary": "This template will launch a fully configured Puppet Enterprise Master VM.",
   "githubUsername": "gregohardy",
-  "dateUpdated": "2017-09-22"
+  "dateUpdated": "2018-07-16"
 }
